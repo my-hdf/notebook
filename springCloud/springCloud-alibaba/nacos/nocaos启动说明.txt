@@ -1,0 +1,2 @@
+nacos启动时，安装路径(也就是解压路径不能包含中文)，否在会报错
+将nacos的start.cmd文件的mode属性进行更改，值修改为standalone
