@@ -14,3 +14,18 @@ Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。
 
 [https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html](https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html)
 
+nacos实现集群环境下数据的一致性和持久化
+
+多个nacos构成的集群连接在一个mysql数据库上，而不是使用nacos本身自带的数据库，nacos切换数据库mysql
+
+1. 在navicat里面执行nacos-mysql.sql，创建数据库和表
+2. 添加配置
+
+```sql
+spring.datasource.platform=mysql
+db.num=1
+db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+db.user=root
+db.password=123456
+```
+
