@@ -21,11 +21,41 @@ nacos实现集群环境下数据的一致性和持久化
 1. 在navicat里面执行nacos-mysql.sql，创建数据库和表
 2. 添加配置
 
-```sql
+```properties
 spring.datasource.platform=mysql
 db.num=1
 db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
 db.user=root
 db.password=123456
 ```
+
+nacos集群搭建
+
+1. 在linux下安装mysql
+
+2. 安装jdk
+
+3. 安装nginx
+
+4. 安装nacos
+
+5. 初始化nacos的mysql数据库，创建nacos_config数据库，根据conf目录下面的nacos_config.mysql建表
+
+6. 修改application.properties,添加mysql的连接配置
+
+   ```properties
+   spring.datasource.platform=mysql
+   db.num=1
+   db.url.0=jdbc:mysql://127.0.0.1:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+   db.user=root
+   db.password=123456
+   ```
+
+7. 拷贝cluster.conf文件，添加集群配置 ip:port
+
+8. 拷贝几个nacos结点
+
+9. 修改拷贝后节点的端口号application.properties > server.port=???
+
+   
 
