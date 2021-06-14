@@ -119,4 +119,32 @@ kill -USR2 master进程号
 kill -QUIT `cat /usr/local/nginx/logs/nginx.pid.oldbin`
 ```
 
-nginx配置文件nginx.conf
+#### **配置文件nginx.conf**
+
+**nginx全局块user指令**
+
+使用user指令可以指定启动工作进程的用户及用户组，这样对于系统的访问更加精细、更加安全。
+
+```shell
+#修改配置nginx.conf文件
+user www  #指定某用户
+# 检查配置文件
+ ./nginx -t
+nginx: [emerg] getpwnam("www") failed in /usr/local/nginx/conf/nginx.conf:2
+nginx: configuration file /usr/local/nginx/conf/nginx.conf test failed # 不存在www用户
+useradd www
+# 检查配置文件
+./nginx -t
+nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
+#修改配置文件
+ location / {
+           #指定需要加载文件的路径
+            root  /home/www/html;
+            index  index.html index.htm;
+           # proxy_pass http://cluster;
+        }
+./nginx -s reload
+```
+
+http://39.103.228.36/
